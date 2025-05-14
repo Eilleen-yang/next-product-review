@@ -16,11 +16,14 @@ export default function ProductDetailPage() {
     }
   }, [id, product, router]);
 
-  if (!product) return null;
-  // <div>
-  //   <p>해당 제품을 찾을 수 없습니다.</p>
-  //   <button onClick={() => router.push("/products")}>목록으로 이동</button>
-  // </div>
+  if (!product)
+    return (
+      <div className="flex justify-center items-center h-40">
+        <div className="spinner " />
+        <p>해당 제품을 찾을 수 없습니다.</p>
+        {/* <button onClick={() => router.push("/products")}>목록으로 이동</button> */}
+      </div>
+    );
 
   return (
     <div className="p-6">

@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@layer utilities {
+  .spinner {
+    @apply w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
