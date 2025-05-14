@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ReviewForm() {
+export default function ReviewForm({ onAdd }) {
   const [review, setReview] = useState("");
 
   const handleSubmit = (e) => {

@@ -4,15 +4,49 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import ReviewForm from "../_components/ReviewForm";
 
-export default function ProductDetailPage() {
+export async function getServerSideProps(context) {
+  const { id } = context.params;
+  const product = products.find((p) => p.id === id);
+
+  if (!product) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const res = await fetch(`http://localhost:3000/api/reviews/${id}`);
+  const reviews = await res.json();
+
+  return {
+    props: {
+      product,
+      initialReviews: reviews,
+    },
+  };
+}
+
+export default function ProductDetailPage({ product, initialReviews }) {
   const router = useRouter();
   const { id } = router.query;
 
-  const product = products.find((p) => p.id === id);
+  // const product = products.find((p) => p.id === id);
 
-  const [reviews, setReviews] = useState([]);
-  const handleAddReview = (text) => {
-    setReviews((prev) => [...prev, { id: Date.now(), text }]);
+  // const [reviews, setReviews] = useState([]);
+  // const handleAddReview = (text) => {
+  //   setReviews((prev) => [...prev, { id: Date.now(), text }]);
+  // };
+
+  const [reviews, setReviews] = useState(initialReviews || []);
+  const handleAddReview = async (text) => {
+    if (!product) return;
+
+    const res = await fetch(`/api/reviews/${product.id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+    });
+    const newReview = await res.json();
+    setReviews((prev) => [...prev, newReview]);
   };
 
   // id값이 undefind일 수 있어서 useEffect를 사용해 조건을 준다.
