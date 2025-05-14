@@ -1,6 +1,11 @@
+import Link from "next/link";
+
 export default function ProductCard({ product }) {
   return (
-    <div className="p-4 border rounded shadow hover:shadow-lg transition">
+    <Link
+      href={`/products/${product.id}`}
+      className="p-4 border rounded shadow hover:shadow-lg transition"
+    >
       <img
         src={product.image}
         alt={product.name}
@@ -11,6 +16,6 @@ export default function ProductCard({ product }) {
       <p className="mt-2 font-bold text-blue-600">
         {product.price.toLocaleString()}원
       </p>
-    </div>
+    </Link>
   );
 }
