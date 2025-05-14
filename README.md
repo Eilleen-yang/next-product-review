@@ -1,40 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Mandoo Shop
 
-## Getting Started
+## 기술 개발
 
-First, run the development server:
+- 라우팅/동적 라우팅
+- next/image, next/link, next/head
+- getStaticProps, getStaticPaths
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Next.js Page Router 프로젝트 초기화
+2. 제품 리스트 페이지 구현
+3. 제품 상세 페이지 - 동적 라우팅 구현
+4. 리뷰 작성 기능 및 폼 처리
+5. getStaticProps / getServerSideProps 활용
+6. 레이아웃 구성 (\_app.js,\_document.js)
+7. 검색 기능 + 필터 기능 추가
+8. SEO 및 메타 태그 적용
+9. 배포 전 최적화 및 마무리
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 만든 페이지
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+1. 제품리스트 페이지
+2. 제품리스트 페이지 - 검색
+3. 제품 상세페이지
+4. 제품 상세페이지 - 댓글 리뷰
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 만들어야할 추가 기능
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+> 실제 이커머스 서비스에서는 사용자 경험을 위해 “장바구니”는 필수 기능입니다.
+> 장바구니는 로그인 없이도 사용할 수 있어야 하며, 페이지를 이동해도 유지되어야 합니다.
+> 이 기능을 직접 구현하면 **상태 관리, 로컬 스토리지, 라우팅, UI/UX 흐름**을 자연스럽게 연습할 수 있습니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. “장바구니에 담기” 버튼 추가
+   - 제품 상세 페이지에 장바구니 담기 버튼 추가
+   - 클릭 시 해당 제품이 장바구니에 저장됨
+2. 장바구니 페이지 (/cart) 구현
+   - 장바구니에 담은 상품 목록 렌더링
+   - 수량 변경, 삭제 기능 포함
+   - 총 합계 금액 표시
+3. 장바구니 데이터 유지
 
-## Learn More
+   - 새로고침 또는 페이지 이동 시에도 데이터 유지되어야 함
+   - Context API 를 통해 상태를 공유해야 함
+   - 장바구니 데이터 예시
 
-To learn more about Next.js, take a look at the following resources:
+   ```javascript
+   [
+      {
+        id: "p1", // 상품 ID
+        name: "무선 키보드",
+        price: 45000,
+        quantity: 2, // 수량
+        image: "/keyboard.png",
+      },
+   ...
+   ]
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+4. 헤더에 장바구니 nav 추가
+   - 장바구니에 담긴 상품 수 표시 (ex: `Cart(3)`)
+     예) 헤드폰2개, 키보드1개 = 표시 상품 수 2
+   - 클릭 시 /cart 페이지로 이동
