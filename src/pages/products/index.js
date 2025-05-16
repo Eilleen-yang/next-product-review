@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import ProductCard from "../_components/ProductCard";
-import products from "../data/products";
+import ProductCard from "../../_components/ProductCard";
+import products from "../../data/products";
 import { useState, useEffect } from "react";
 import Head from "next/head";
 

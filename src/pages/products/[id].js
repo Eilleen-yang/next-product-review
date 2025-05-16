@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
-import products from "../data/products";
+import products from "../../data/products";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import ReviewForm from "../_components/ReviewForm";
+import ReviewForm from "../../_components/ReviewForm";
 import Head from "next/head";
+import { useCart } from "@/src/context/cartContext";
 
 export async function getServerSideProps(context) {
   const { id } = context.params;
@@ -29,6 +30,16 @@ export async function getServerSideProps(context) {
 export default function ProductDetailPage({ product, initialReviews }) {
   const router = useRouter();
   const { id } = router.query;
+
+  const { dispatch } = useCart();
+
+  const handleAddToCart = () => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: product,
+    });
+    alert("장바구니에 추가되었습니다.");
+  };
 
   // const product = products.find((p) => p.id === id);
 
@@ -103,6 +114,13 @@ export default function ProductDetailPage({ product, initialReviews }) {
             </p>
           </div>
         </div>
+
+        <button
+          onClick={handleAddToCart}
+          className="mt-6 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
+        >
+          장바구니에 담기
+        </button>
 
         <div className="mt-10">
           <h2 className="text-lg font-semibold mb-2">리뷰</h2>

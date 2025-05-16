@@ -1,4 +1,4 @@
-import { addReview, getReviewsByProductId } from "../../data/reviews";
+import { addReview, getReviewsByProductId } from "../../../data/reviews";
 
 export default function handler(req, res) {
   const { id } = req.query;
