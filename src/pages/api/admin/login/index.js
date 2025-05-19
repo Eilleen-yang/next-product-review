@@ -7,6 +7,12 @@ export default function handler(req, res) {
   const ADMIN_PW = "password123";
 
   if (username === ADMIN_ID && password === ADMIN_PW) {
+    // 쿠키 설정
+    res.setHeader(
+      "Set-Cookie",
+      "authToken=admin_token; HttpOnly; Path=/; Max-Age=3600"
+    );
+
     return res.status(200).json({ message: "로그인 성공" });
   }
 
