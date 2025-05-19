@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
@@ -22,9 +23,14 @@ export default function AdminDashboard() {
       <h1 className="mb-4 text-2xl font-bold text-blue-700">관리자 대시보드</h1>
       <ul className="space-y-2">
         <li>
-          <a href="/admin/products" className="text-blue-600 underline">
+          <Link href="/admin/products" className="text-blue-600 underline">
             상품 관리
-          </a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/admin/orders" className="text-blue-600 underline">
+            주문 관리
+          </Link>
         </li>
         <button
           className="rounded bg-blue-200 p-2 mt-4 text-white font-semibold"
