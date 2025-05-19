@@ -2,10 +2,6 @@
 
 ## 기술 개발
 
-- 라우팅/동적 라우팅
-- next/image, next/link, next/head
-- getStaticProps, getStaticPaths
-
 1. Next.js Page Router 프로젝트 초기화
 2. 제품 리스트 페이지 구현
 3. 제품 상세 페이지 - 동적 라우팅 구현
@@ -80,4 +76,31 @@ localStorage.setItem("adminLoggedIn", "true");
   - 조회 : `GET`
   - 상태 변경 : `PATCH`
 
-### 개선 : 쿠키 + `getServerSideProps`
+### 인증 방식을 쿠키 기반 개선 : 쿠키 + `getServerSideProps`
+
+- `admin_token`이란 **쿠키가 존재**하면 인증된 것으로 간주
+- 인증이 안 된 경우 → `/admin/login`으로 서버 리다이렉트
+- 인증된 경우 → 서버에서 주문 목록을 `fetch`하여 `props`로 넘김
+
+## 스터디 공부 내용
+
+- 라우팅/동적 라우팅
+- `next/image`, `next/link`, `next/head`
+- `getStaticProps`, `getStaticPaths`
+
+## `Next.js Page Router`
+
+### 기본 원리
+
+- `pages/` 디렉토리 기반 자동 라우팅.
+- 파일 이름이 곧 URL 경로<br/>(`/pages/about.js` → `/about`).
+- `pages/index.js`는 루트 경로(`/`)와 매칭됨.
+- 폴더 구조를 통해 동적 라우팅 지원<br/>(`pages/products/[id].js` → `/products/123`).
+- `getStaticProps`, `getServerSideProps`, `getStaticPaths`로 **데이터 패칭** 처리.
+
+### 주요 특징
+
+- **파일 기반 라우팅** (직관적이고 쉬움)
+- **서버 사이드 렌더링(SSR)**, **정적 생성(SSG)**, **클라이언트 렌더링** 모두 지원
+- **API Routes 지원** (pages/api/ 안에 파일 생성)
+- **중첩 라우팅, 레이아웃 공유 불편** → App Router와의 차이점
