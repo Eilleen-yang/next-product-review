@@ -16,6 +16,12 @@ const mockOrders = [
 ];
 
 export default function handler(req, res) {
+  // 쿠키 설정;
+  const token = req.cookies?.authToken;
+  if (token !== "admin_token") {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
   if (req.method === "GET") {
     return res.status(200).json(mockOrders);
   }
